@@ -57,6 +57,8 @@ class AnnouncementResource extends Resource
                     ])
                     ->multiple()
                     ->required(),
+                Select::make('organization_id')
+                    ->relationship('organization'),
             ]);
     }
 
@@ -68,6 +70,7 @@ class AnnouncementResource extends Resource
                 TextColumn::make('title'),
                 TextColumn::make('body'),
                 IconColumn::make('icon'),
+                TextColumn::make('organization.name'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('icon')->nullable();
             $table->text('users')->nullable();
             $table->timestamps();
+            $table->foreignUuid('organization_id')->nullable();
         });
     }
 

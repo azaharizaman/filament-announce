@@ -3,7 +3,10 @@
 namespace Rupadana\FilamentAnnounce\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Organization;
+
 
 class Announcement extends Model
 {
@@ -22,4 +25,9 @@ class Announcement extends Model
     protected $casts = [
         'users' => 'array',
     ];
+
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
 }
