@@ -26,6 +26,9 @@
         $colorStyles = "--c-400:$color;--c-500:$color;--c-600:$color;";
     }
 
+    
+    $this->dispatch('open-modal', id: 'announcement');
+
 @endphp
 
 <div class="{{ $colorClasses }}" style="{{ $colorStyles }}">
@@ -107,4 +110,26 @@
                 x-on:click="$dispatch('markedAnnouncementAsRead', {id: '{{ $notification->getId() }}'})" />
         </div>
     @endif
+
+    <x-filament::modal :close-by-clicking-away="false" icon="{{ $icon }}" id="announcement" width="5xl">
+        <x-slot name="heading">
+            {{ $title }}
+        </x-slot>
+    
+        <div style="color: black !important;">
+            {{ $body}}
+        </div>
+
+        <x-slot name="footer">
+            @if ($notification->isClosable())
+                <div class="flex items-center">
+                    <x-filament::button icon="heroicon-o-x-mark" color="{{ $colorStyles }}"
+                        x-on:click="$dispatch('markedAnnouncementAsRead', {id: '{{ $notification->getId() }}'})" >
+                        Dismiss
+                    </x-filament::button>
+                </div>
+            @endif
+        </x-slot>
+    </x-filament::modal>
 </div>
+
