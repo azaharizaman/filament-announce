@@ -30,7 +30,7 @@ class CreateAnnouncement extends CreateRecord
         $isNotifyToAll = in_array('all', $record->users);
 
         $users = $isNotifyToAll ? User::all() : User::query()->whereHas('organizations', function ($query) use ($record) {
-            $query->where('id', $record->organization_id);
+            $query->where('organization_id', $record->organization_id);
         })->whereIn('id', $record->users)->get();
 
         $announce = Announce::make();
